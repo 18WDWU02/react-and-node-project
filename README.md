@@ -35,6 +35,11 @@ $ cd app
 $ npm start
 ```
 This will start the react application on port 3000.
+If you are running this on a vagrant server, you also need to create the .env file in the app directory and include the line to allow vagrant projects.
+```sh
+CHOKIDAR_USEPOLLING=true
+HOST=192.168.33.10
+```
 
 ## Changing the data
 If you want to change the data/api you connect to, you need to edit the src/App.js file within the app project.
