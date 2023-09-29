@@ -1,1 +1,2 @@
-FROM Ubuntu
+FROM ubuntu
+WORKDIR
