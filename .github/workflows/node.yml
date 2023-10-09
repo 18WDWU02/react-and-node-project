@@ -11,10 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install sshpass
-        run: |
-          sudo apt-get update 
-          sudo apt-get install -y sshpass 
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -23,6 +19,7 @@ jobs:
         run: |
           echo "Deploying to master branch"
           # SSH into your server
+          apt-get install -y sshpass
           sshpass -p "${{ secrets.DEPLOY_PASSWORD }}" ubuntu@54.163.113.76
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
           # Navigate to the project directory on the server
