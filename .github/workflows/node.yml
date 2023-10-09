@@ -1,0 +1,29 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - developer
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to Maater Branch
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo "Deploying to master branch"
+          # Add your deployment script here
+          # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
+
+      - name: Deploy to Developer Branch
+        if: github.ref == 'refs/heads/developer'
+        run: |
+          echo "Deploying to develop branch"
+          # Add your deployment script here
+          # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
