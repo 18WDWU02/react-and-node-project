@@ -20,8 +20,6 @@ jobs:
           echo "Deploying to master branch"
           # SSH into your server
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ubuntu@54.163.113.76
-        env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
           # Navigate to the project directory on the server
           cd /var/www/html/Github
@@ -39,3 +37,5 @@ jobs:
           # Pull the latest changes from the repository
           git pull developer
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
