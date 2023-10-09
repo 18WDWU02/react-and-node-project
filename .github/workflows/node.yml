@@ -19,6 +19,8 @@ jobs:
         run: |
           echo "Deploying to master branch"
           # SSH into your server
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ubuntu@44.201.200.117
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
           # Navigate to the project directory on the server
