@@ -19,7 +19,7 @@ jobs:
         run: |
           echo "Deploying to master branch"
           # SSH into your server
-          ssh ubuntu@44.201.200.117 -i ~/.ssh/deploy-key -o StrictHostKeyChecking=no
+          echo "${{ secrets.DEPLOY_PASSWORD }}" | ssh ubuntu@44.201.200.117
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
           # Navigate to the project directory on the server
           cd /var/www/html/Github
