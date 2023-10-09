@@ -14,16 +14,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Deploy to Maater Branch
+      - name: Deploy to Master Branch
         if: github.ref == 'refs/heads/master'
         run: |
           echo "Deploying to master branch"
-          # Add your deployment script here
+          # SSH into your server
+          ssh ubuntu@44.201.200.117 -i ~/.ssh/deploy-key -o StrictHostKeyChecking=no
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
-
+          # Navigate to the project directory on the server
+          cd /var/www/html/Github
+          # Pull the latest changes from the repository
+          git pull master
       - name: Deploy to Developer Branch
         if: github.ref == 'refs/heads/developer'
         run: |
           echo "Deploying to develop branch"
-          # Add your deployment script here
+          # SSH into your server
+          ssh ubuntu@44.201.200.117 -i ~/.ssh/deploy-key -o StrictHostKeyChecking=no
+          # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
+          # Navigate to the project directory on the server
+          cd /var/www/html/Github
+          # Pull the latest changes from the repository
+          git pull developer
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
