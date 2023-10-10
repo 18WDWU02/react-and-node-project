@@ -40,6 +40,6 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd /var/www/html/Github/react-and-node-project
-          git pull origin master
+          git pull origin developer
           #npm install --production
           #pm2 restart node-app
