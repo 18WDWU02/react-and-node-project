@@ -20,14 +20,14 @@ jobs:
 
       - name: Deploy to Master Branch
         if: github.ref == 'refs/heads/master'
+        env:
+         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo "Deploying to master branch"
           # SSH into your server
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key
           chmod 600 ~/.ssh/deploy-key
           ssh -i ~/.ssh/deploy-key ubuntu@18.144.4.95
-        env:
-         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           # Navigate to the project directory on the server
           #cd /var/www/html/Github
           # Pull the latest changes from the repository
