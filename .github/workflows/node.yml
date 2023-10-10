@@ -1,51 +1,45 @@
-name: CI/CD Pipeline
+name: Node Github CI
 
 on:
   push:
     branches:
-      - master
-      - developer
+      - main
 
 jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install
+      run: |
+        npm install
+      
+      env:
+        CI: true
+
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Install SSH
-        run: |
-          # Install SSH client
-          sudo apt-get install -y openssh-client
-      - name: Checkout Repository
-        uses: actions/checkout@v2
 
-      - name: Deploy to Master Branch
-        if: github.ref == 'refs/heads/master'
-        env:
-         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          echo "Deploying to master branch"
-          # SSH into your server
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key
-          chmod 600 ~/.ssh/deploy-key
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy-key ubuntu@18.144.4.95 uptime
-          ssh -i ~/.ssh/deploy-key ubuntu@18.144.4.95
-          # Navigate to the project directory on the server
-      - name: Change the directory
-        #working-directory: ./var/www/html/Github/react-and-node-project
-        run: |
-          cd /var/www/html/Github/react-and-node-project
-          git pull origin master
-      - name: Deploy to Developer Branch
-        if: github.ref == 'refs/heads/developer'
-        run: |
-          echo "Deploying to develop branch"
-          # SSH into your server
-          ssh ubuntu@18.144.4.95 -p 22 -i ~/.ssh/deploy-key -o StrictHostKeyChecking=no
-          # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
-          # Navigate to the project directory on the server
-          cd /var/www/html/Github
-          # Pull the latest changes from the repository
-          git pull developer
-          # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
-        env:
-          SSH_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+    steps:
+    - name: SSH and deploy node app
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          cd /home/ubuntu/Mob_Coder
+          git pull origin main
+          npm install --production
+          pm2 restart node-app
