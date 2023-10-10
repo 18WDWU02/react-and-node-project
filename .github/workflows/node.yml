@@ -9,7 +9,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Install SSH
         run: |
@@ -25,7 +24,7 @@ jobs:
         run: |
           echo "Deploying to master branch"
           # SSH into your server
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy-key
           chmod 600 ~/.ssh/deploy-key
           ssh -i ~/.ssh/deploy-key ubuntu@18.144.4.95
           # Navigate to the project directory on the server
