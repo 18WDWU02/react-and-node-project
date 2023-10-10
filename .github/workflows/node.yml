@@ -31,8 +31,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy to Master Branch
-      if: github.ref == 'refs/heads/master'
     - name: SSH and deploy node app
       uses: appleboy/ssh-action@master
       with:
