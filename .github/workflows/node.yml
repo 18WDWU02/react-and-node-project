@@ -23,12 +23,15 @@ jobs:
         run: |
           echo "Deploying to master branch"
           # SSH into your server
-          sshpass -p "${{ secrets.DEPLOY_PASSWORD }}" ssh ubuntu@18.144.4.95 -p 22
-          # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key
+          chmod 600 ~/.ssh/deploy-key
+          ssh -i ~/.ssh/deploy-key ubuntu@18.144.4.95
+        env:
+         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           # Navigate to the project directory on the server
-          cd /var/www/html/Github
+          #cd /var/www/html/Github
           # Pull the latest changes from the repository
-          git pull master
+          #git pull master
       - name: Deploy to Developer Branch
         if: github.ref == 'refs/heads/developer'
         run: |
