@@ -30,9 +30,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy-key ubuntu@18.144.4.95 uptime
           ssh -i ~/.ssh/deploy-key ubuntu@18.144.4.95
           # Navigate to the project directory on the server
-          #cd /var/www/html/Github
+          cd /var/www/html/Github
           # Pull the latest changes from the repository
-          #git pull master
+          git pull origin master
       - name: Deploy to Developer Branch
         if: github.ref == 'refs/heads/developer'
         run: |
