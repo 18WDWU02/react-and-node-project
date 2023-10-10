@@ -20,7 +20,7 @@ jobs:
           echo "Deploying to master branch"
           # SSH into your server
           sudo apt-get install -y sshpass
-          sudo sshpass -p "${{ secrets.DEPLOY_PASSWORD }}" ubuntu@54.163.113.76
+          sudo sshpass -p "${{ secrets.DEPLOY_PASSWORD }}" ssh ubuntu@18.144.4.95
           # Use the ${{ secrets.DEPLOY_PASSWORD }} secret as needed
           # Navigate to the project directory on the server
           cd /var/www/html/Github
