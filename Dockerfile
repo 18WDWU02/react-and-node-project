@@ -1,1 +1,2 @@
-FROM Ubuntu 
+FROM Ubuntu
+make some changes 
