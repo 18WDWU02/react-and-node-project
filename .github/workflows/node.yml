@@ -3,7 +3,7 @@ name: Node Github CI
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   test:
@@ -39,7 +39,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd /home/ubuntu/Mob_Coder
-          git pull origin main
+          cd /var/www/html/Github/react-and-node-project
+          git pull origin master
           npm install --production
           pm2 restart node-app
