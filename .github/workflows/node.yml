@@ -31,8 +31,8 @@ jobs:
           ssh -i ~/.ssh/deploy-key ubuntu@18.144.4.95
           # Navigate to the project directory on the server
       - name: Change the directory
-        working-directory: /var/www/html/Github
         run: |
+          ls -al
           cd /var/www/html/Github
           git pull origin master
       - name: Deploy to Developer Branch
