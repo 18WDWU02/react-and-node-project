@@ -27,6 +27,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key
           chmod 600 ~/.ssh/deploy-key
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy-key ubuntu@18.144.4.95 uptime
           ssh -i ~/.ssh/deploy-key ubuntu@18.144.4.95
           # Navigate to the project directory on the server
           #cd /var/www/html/Github
