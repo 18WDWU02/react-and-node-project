@@ -39,8 +39,15 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd /var/www/html/Github/react-and-node-project
-          git pull origin master
-          #npm install --production
-          #pm2 restart node-app
-          
+          script: |
+            if [ $GITHUB_REF = "refs/heads/master" ]; then
+              cd /var/www/html/Github/react-and-node-project
+              git pull origin master
+              #npm install --production
+              #pm2 restart node-app
+            elif [ $GITHUB_REF = "refs/heads/developer" ]; then
+              cd /var/www/html/Github/react-and-node-project-dev
+              git pull origin developer
+              #npm install --production
+              #pm2 restart node-app
+            fi
