@@ -59,4 +59,3 @@ jobs:
               # pm2 restart node-app
               ;;
           esac
->>>>>>> 01968362e37aaa536d74aa96aaf6cfdfe70a058b
