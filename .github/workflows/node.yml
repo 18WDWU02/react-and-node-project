@@ -41,12 +41,12 @@ jobs:
         script: |
           script: |
             if [ $GITHUB_REF = "refs/heads/master" ]; then
-              cd /var/www/html/Github/react-and-node-project
+              /var/www/html/github-master/react-and-node-project
               git pull origin master
               #npm install --production
               #pm2 restart node-app
             elif [ $GITHUB_REF = "refs/heads/developer" ]; then
-              cd /var/www/html/Github/react-and-node-project-dev
+              /var/www/html/github-dev/react-and-node-project
               git pull origin developer
               #npm install --production
               #pm2 restart node-app
