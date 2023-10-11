@@ -39,7 +39,24 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
+<<<<<<< HEAD
           cd /var/www/html/Github/react-and-node-project
           git pull origin developer
           #npm install --production
           #pm2 restart node-app
+=======
+          case $GITHUB_REF in
+            refs/heads/master)
+              cd /var/www/html/github-master/react-and-node-project
+              git pull origin master
+              # npm install --production
+              # pm2 restart node-app
+              ;;
+            refs/heads/developer)
+              cd /var/www/html/github-dev/react-and-node-project
+              git pull origin developer
+              # npm install --production
+              # pm2 restart node-app
+              ;;
+          esac
+>>>>>>> 01968362e37aaa536d74aa96aaf6cfdfe70a058b
